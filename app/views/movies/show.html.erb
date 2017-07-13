@@ -1,10 +1,21 @@
 <h1><%= @movie.name %></h1>
-<h3>Created by: <%= User.find(@movie.user_id).full_name %></h3>
+
+<h3>Created by: <%= link_to @movie.creator.full_name, @movie.creator %></h3>
 <p>Genre: <%= @movie.genre %></p>
 <p>Location Filmed: <%= @movie.location_filmed %></p>
 <p>Length: <%= @movie.length %> seconds</p>
 
-<h5>Have you watched this movie?</h5>
+<h5>Reviews:</h5>
+<% if !@movie.reviews.empty? %>
+	<% @movie.reviews.each do |review| %>
+		<h6>Rating (1-5): <%= review.stars %></h6>
+		<p><%= review.content %></p>
+		<% @reviewer = User.find(review.user_id) %>
+		<p>- <%= @reviewer.full_name %>, <%= distance_of_time_in_words(Time.now - review.created_at) %> ago</p>
+	<% end %>
+<% else %>
+	0
+<% end %>
 
 <%= form_with model: @review, local: true do |f| %>
 	<div class="input-field">
@@ -16,6 +27,7 @@
 		<%= f.text_area :content %>
 	</div>
 	<div class="input-field">
+		<%= f.hidden_field :movie_id, value: @movie.id %>
 		<%= f.submit %>
 	</div>
 <% end %>

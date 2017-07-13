@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   resources :movies
   resources :viewings
 
-  get 'users/index'
-  get 'users/show'
+  resources :users, only: [:index, :show]
 
   devise_for :users, controllers: {
      sessions: 'users/sessions',

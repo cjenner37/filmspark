@@ -3,13 +3,13 @@ class ReviewsController < ApplicationController
   end
 
   def new
+    @review = Review.new
   end
 
   def create
-    sad;lkf
-    current_user.reviews.create(review_params)
+    @review = current_user.reviews.create(review_params)
 
-    redirect_to movie_show_path
+    redirect_to Movie.find(params[:review][:movie_id])
   end
 
   def edit
@@ -22,6 +22,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+  end
   
   private
   def review_params
