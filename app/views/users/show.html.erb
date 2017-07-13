@@ -1,1 +1,25 @@
 <h1>Welcome, <%= @user.first_name %></h1>
+
+
+<% if !@user.creations.empty? %>
+	<h3>Movies created:</h3>
+	<ul>
+		<% @user.creations.each do |movie| %>
+			<li>
+				<%= link_to movie.name, movie %>
+			</li>
+		<% end %>
+<% end %>
+
+<% if !@user.viewings.empty? %>
+	<h3>Movies viewed:</h3>
+	<ul>
+		<% @user.movies.each do |movie| %>
+			<li>
+				<%= link_to movie.name, movie %>
+			</li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= link_to "Add a new movie", new_movie_path, class: "btn-large" %>

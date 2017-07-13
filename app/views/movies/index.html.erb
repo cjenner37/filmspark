@@ -1,2 +1,12 @@
-<h1>Movies#index</h1>
-<p>Find me in app/views/movies/index.html.erb</p>
+<h1>All Movies</h1>
+
+<ul>
+	<% Movie.all.each do |movie| %>
+		<li>
+			<h3><%= link_to movie.name, movie %></h3>
+			<p>Genre: <%= movie.genre %></p>
+			<p>Location Filmed: <%= movie.location_filmed %></p>
+			<p>Length: <%= movie.length %> seconds</p>
+		</li>
+	<% end %>	
+</ul>

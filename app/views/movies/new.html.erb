@@ -1,2 +1,27 @@
-<h1>Movies#new</h1>
-<p>Find me in app/views/movies/new.html.erb</p>
+<h1>Add a new movie</h1>
+
+<%= form_with model: @movie, local: true do |f| %>
+	<div class="input-field">
+		<%= f.label :name %><br>
+		<%= f.text_field :name %>
+	</div>
+
+	<div class="input-field">
+		<%= f.label :genre %><br>
+		<%= f.text_field :genre %>
+	</div>
+
+	<div class="input-field">
+		<%= f.label :location_filmed %><br>
+		<%= f.text_field :location_filmed %>
+	</div>
+
+	<div class="input-field">
+		<%= f.label :length %><br>
+		<%= f.number_field :length %>
+	</div>
+
+	<div class="input-field">
+		<%= f.submit "Add Movie" %>
+	</div>
+<% end %>

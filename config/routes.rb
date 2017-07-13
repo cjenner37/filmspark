@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-	
+
+  get 'creators/index'
+
+  get 'creators/show'
+
   resources :reviews
   resources :movies
+  resources :viewings
 
   get 'users/index'
   get 'users/show'

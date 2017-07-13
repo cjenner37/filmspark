@@ -9,13 +9,38 @@
   </head>
 
   <body>
+
+    <!-- Navbar -->
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper purple darken-1">
+          <%= link_to "Filmspark", root_path, class: "brand-logo center deep-purple-text text-lighten-4" %>
+          <ul class="left hide-on-med-and-down">
+            <li><%= link_to "Creators", creators_index_path %></li>
+            <li><%= link_to "Movies", movies_path %></li>
+            <li><%= link_to "Reviews", reviews_path %></li>
+          </ul>
+          <ul class="right hide-on-med-and-down">
+
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to "Log in", new_user_session_path %>
+              </li>
+              <li>
+                <%= link_to "Sign up", new_user_registration_path %>
+              </li>
+            <% end %>
+
+          </ul>
+        </div>
+      </nav>
+    </div> 
+
     <div id="body-container">
-    		<% if user_signed_in? %>
-    			<%= link_to "Log out", destroy_user_session_path, method: :delete %>
-    		<% else %>
-    			<%= link_to "Log in", new_user_session_path %>
-    			<%= link_to "Sign up", new_user_registration_path %>
-    		<% end %>
   		<p class="notice"><%= notice %></p>
   		<p class="alert"><%= alert %></p>
   		<%= yield %>

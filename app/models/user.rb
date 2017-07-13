@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
    has_many :viewings
    has_many :movies, through: :viewings
+   has_many :creations, class_name: "Movie"
    has_many :reviews
 
    validates_presence_of :first_name
