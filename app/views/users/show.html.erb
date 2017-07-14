@@ -1,5 +1,5 @@
 <h1>Welcome, <%= @user.first_name %></h1>
-
+<%= image_tag @user.avatar.url, class: "materialboxed", width: "350px" %>
 
 <% if !@user.creations.empty? %>
 	<h3>Movies created:</h3>

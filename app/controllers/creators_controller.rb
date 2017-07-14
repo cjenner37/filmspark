@@ -4,7 +4,9 @@ class CreatorsController < ApplicationController
   		@creators = []
   		@movies.each do |movie|
   			if !movie.creator.nil?
-  				@creators << movie.creator
+  				if !@creators.include? movie.creator
+	  				@creators << movie.creator
+	  			end
   			end
   		end
   end

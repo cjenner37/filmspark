@@ -1,9 +1,11 @@
 <h1><%= @movie.name %></h1>
 
+<%= image_tag @movie.avatar.url, class: "materialboxed", height: "500px" %>
+
 <h3>Created by: <%= link_to @movie.creator.full_name, @movie.creator %></h3>
 <p>Genre: <%= @movie.genre %></p>
 <p>Location Filmed: <%= @movie.location_filmed %></p>
-<p>Length: <%= distance_of_time_in_words(@movie.length.seconds) %></p>
+<p><%= Time.at(@movie.length).utc.strftime("%l hour and %M minutes long") %></p>
 
 <h5>Reviews:</h5>
 <% if !@movie.reviews.empty? %>
@@ -31,3 +33,4 @@
 		<%= f.submit %>
 	</div>
 <% end %>
+
