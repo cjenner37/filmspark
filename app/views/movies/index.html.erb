@@ -6,7 +6,7 @@
 			<h3><%= link_to movie.name, movie %></h3>
 			<p>Genre: <%= movie.genre %></p>
 			<p>Location Filmed: <%= movie.location_filmed %></p>
-			<p>Length: <%= movie.length %> seconds</p>
+			<p>Length: <%= distance_of_time_in_words(movie.length.seconds) %></p>
 		</li>
 	<% end %>	
 </ul>

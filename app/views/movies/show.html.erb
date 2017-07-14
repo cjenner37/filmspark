@@ -3,7 +3,7 @@
 <h3>Created by: <%= link_to @movie.creator.full_name, @movie.creator %></h3>
 <p>Genre: <%= @movie.genre %></p>
 <p>Location Filmed: <%= @movie.location_filmed %></p>
-<p>Length: <%= @movie.length %> seconds</p>
+<p>Length: <%= distance_of_time_in_words(@movie.length.seconds) %></p>
 
 <h5>Reviews:</h5>
 <% if !@movie.reviews.empty? %>

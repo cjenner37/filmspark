@@ -8,9 +8,9 @@ class MoviesController < ApplicationController
 
   def create
     @user = current_user
-    @user.movies.create(movie_params)
+    @movie = @user.creations.create(movie_params)
 
-    redirect_to users_show_path
+    redirect_to @movie
   end
 
   def edit
