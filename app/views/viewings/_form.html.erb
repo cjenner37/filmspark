@@ -1,0 +1,11 @@
+<%= form_with model: @viewing do |f| %>
+   <div class="field">
+     <%= f.check_box :liked, id: "viewing_liked" %>
+     <%= f.label :liked, "Did you like this movie?" %>
+   </div>
+	<div class="input-field">
+		<%= f.hidden_field :movie_id, value: @movie.id %>
+		<%= f.hidden_field :recently_watched_at, value: @time %>
+		<%= f.submit "Watched", class: "btn" %>
+	</div>
+<% end %>

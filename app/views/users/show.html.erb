@@ -1,25 +1,18 @@
-<h1>Welcome, <%= @user.first_name %></h1>
-<%= image_tag @user.avatar.url, class: "materialboxed", width: "350px" %>
+<div class="row">
+	<div class="col s12">
+		<h1>Welcome, <%= @user.first_name %></h1>
+		<%= image_tag @user.avatar.url, class: "materialboxed", width: "350px" %>
+	</div>
+</div>
 
-<% if !@user.creations.empty? %>
-	<h3>Movies created:</h3>
-	<ul>
-		<% @user.creations.each do |movie| %>
-			<li>
-				<%= link_to movie.name, movie %>
-			</li>
+<h3>Movies created:</h3>
+
+<div class="movies">
+
+   <div class="row">
+		<% @user.creations.reverse_each do |movie| %>
+			<%= render 'movies/movie', movie: movie, class: "col" %>
 		<% end %>
-<% end %>
+   </div>
 
-<% if !@user.viewings.empty? %>
-	<h3>Movies viewed:</h3>
-	<ul>
-		<% @user.movies.each do |movie| %>
-			<li>
-				<%= link_to movie.name, movie %>
-			</li>
-		<% end %>
-	</ul>
-<% end %>
-
-<%= link_to "Add a new movie", new_movie_path, class: "btn-large" %>
+</div>

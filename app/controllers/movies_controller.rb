@@ -1,5 +1,7 @@
 class MoviesController < ApplicationController
   def index
+    @movie = Movie.new
+    @movies = Movie.all
   end
 
   def new
@@ -10,7 +12,11 @@ class MoviesController < ApplicationController
     @user = current_user
     @movie = @user.creations.create(movie_params)
 
-    redirect_to @movie
+    respond_to do |format|
+      if @movie.save
+        format.js
+      end
+    end
   end
 
   def edit
@@ -18,6 +24,9 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @time = Time.now
+
+
     @creator_id = @movie.user_id
     @viewing = Viewing.new
     @review = Review.new

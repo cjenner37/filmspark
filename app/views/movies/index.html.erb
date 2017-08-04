@@ -1,13 +1,24 @@
 <h1>All Movies</h1>
 
-<ul>
-	<% Movie.all.each do |movie| %>
-		<li>
-			<h3><%= link_to movie.name, movie %></h3>
-			<%= image_tag movie.avatar.url, class: "materialboxed", height: "300px" %>
-			<p>Genre: <%= movie.genre %></p>
-			<p>Location Filmed: <%= movie.location_filmed %></p>
-			<p>Length: <%= distance_of_time_in_words(movie.length.seconds) %></p>
-		</li>
-	<% end %>	
-</ul>
+<% if user_signed_in? %>
+	<!-- Modal Trigger -->
+	<a class="waves-effect waves-light btn" id="new-movie-modal-button">Add a movie</a>
+<% end %>
+
+<!-- Modal -->
+<div id="new-movie-modal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+	   <h4>Add a movie</h4>
+		<%= render 'modalform' %>
+ 	</div>
+</div>
+
+<div class="movies">
+
+   <div class="row">
+		<% @movies.reverse_each do |movie| %>
+			<%= render 'movie', movie: movie, class: "col" %>
+		<% end %>
+   </div>
+
+</div>

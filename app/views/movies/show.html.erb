@@ -1,3 +1,4 @@
+<div class="row">
 <h1><%= @movie.name %></h1>
 
 <%= image_tag @movie.avatar.url, class: "materialboxed", height: "500px" %>
@@ -7,30 +8,24 @@
 <p>Location Filmed: <%= @movie.location_filmed %></p>
 <p><%= Time.at(@movie.length).utc.strftime("%l hour and %M minutes long") %></p>
 
-<h5>Reviews:</h5>
 <% if !@movie.reviews.empty? %>
+	<h5>Reviews:</h5>
+<% end %>
+<div class="reviews">
 	<% @movie.reviews.each do |review| %>
-		<h6>Rating (1-5): <%= review.stars %></h6>
-		<p><%= review.content %></p>
-		<% @reviewer = User.find(review.user_id) %>
-		<p>- <%= @reviewer.full_name %>, <%= distance_of_time_in_words(Time.now - review.created_at) %> ago</p>
+		<%= render 'reviews/review', review: review %>
 	<% end %>
-<% else %>
-	0
+</div>
+</div>
+<% if user_signed_in? %>
+	<div class="forms-row row">
+		<div class="col s5">
+			<h4>Did you watch this movie?</h4>
+			<%= render 'viewings/form' %>
+		</div>
+		<div class="review-form col s7">
+			<h4>Would you like to leave a review?</h4>
+			<%= render 'reviews/form' %>
+		</div>
+	 </div>
 <% end %>
-
-<%= form_with model: @review, local: true do |f| %>
-	<div class="input-field">
-		<%= f.label :stars %><br>
-		<%= f.number_field :stars %>
-	</div>
-	<div class="input-field">
-		<%= f.label :content %><br>
-		<%= f.text_area :content %>
-	</div>
-	<div class="input-field">
-		<%= f.hidden_field :movie_id, value: @movie.id %>
-		<%= f.submit %>
-	</div>
-<% end %>
-

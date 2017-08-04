@@ -1,0 +1,6 @@
+<div class="review">
+	<h6>Rating: <%= review.stars %></h6>
+	<p><%= review.content %></p>
+	<% @reviewer = User.find(review.user_id) %>
+	<p>- <%= @reviewer.full_name %>, <%= distance_of_time_in_words(Time.now - review.created_at) %> ago</p>
+</div>

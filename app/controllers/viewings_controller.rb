@@ -6,10 +6,19 @@ class ViewingsController < ApplicationController
   end
 
   def create
-    as;ldkfjsa
-    current_user.viewings.create(viewing_params)
+    @current_user = current_user
+    @viewing = @current_user.viewings.where(movie_id: params[:viewing][:movie_id]).first
 
-    redirect_to movies_path
+    if !@viewing.empty?
+      @viewing.watched_count += 1
+    else
+      @viewing = @current_user.viewings.create(viewing_params)
+    end
+    respond_to do |format|
+      if @viewing.save
+        format.js
+      end
+    end
   end
 
   def edit

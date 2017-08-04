@@ -1,0 +1,7 @@
+<div class="movie">
+	<%= image_tag movie.avatar.url, class: "materialboxed", height: "300px" %>
+	<h4><%= link_to movie.name, movie %></h4>
+	<p>Genre: <%= movie.genre %></p>
+	<p>Location Filmed: <%= movie.location_filmed %></p>
+	<p>Length: <%= distance_of_time_in_words(movie.length.seconds) %></p>
+</div>

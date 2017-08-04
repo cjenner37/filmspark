@@ -7,9 +7,13 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = current_user.reviews.create(review_params)
+    @review = current_user.reviews.new(review_params)
 
-    redirect_to Movie.find(params[:review][:movie_id])
+    respond_to do |format|
+      if @review.save
+        format.js
+      end
+    end
   end
 
   def edit
