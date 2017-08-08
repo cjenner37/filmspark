@@ -1,8 +1,8 @@
-<% if @viewings > 0 %>
-	<h6>You've watched this <%= pluralize(@viewings, 'time') %></h6>
+<% if @viewing %>
+	<h6>You've watched this <%= pluralize(@viewing.watched_count, 'time') %></h6>
 	<p>
 		Last time you watched this, you 
-		<% if @viewed.last.liked == true %>
+		<% if @viewing.liked == true %>
 			liked
 		<% else %>
 			didn't like

@@ -6,10 +6,12 @@ class ViewingsController < ApplicationController
   end
 
   def create
-    @viewing = @current_user.viewings.create(viewing_params)
+    @viewing = current_user.viewings.new(viewing_params)
+    if @viewing.liked = "0"
+      @viewing.liked = false
+    end
     @viewing.watched_count = 1
-
-    @viewing.save
+    @viewing.save!
 
     redirect_to movie_path(@viewing.movie_id)
   end
@@ -22,16 +24,21 @@ class ViewingsController < ApplicationController
   end
 
   def update
-    @viewing = @current_user.viewings.where(movie_id: params[:viewing][:movie_id]).last
-
+    @viewing = current_user.viewings.where(movie_id: params[:viewing][:movie_id]).last
     @viewing.watched_count = @viewing.watched_count + 1
-    @viewing.liked = params[:liked]
-
-    respond_to do |format|
-      if @viewing.save
-        format.js
-      end
+    if params[:viewing][:liked] == "1"
+      @viewing.update(liked: true)
+    else
+      @viewing.update(liked: false)
     end
+      
+    @viewing.save 
+    redirect_to movie_path(@viewing.movie_id)
+    # respond_to do |format|
+    #   if @viewing.save
+    #     format.js
+    #   end
+    # end
   end
 
   def destroy
