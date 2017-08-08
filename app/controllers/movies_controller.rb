@@ -25,10 +25,13 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @time = Time.now
+    @viewing = current_user.viewings.where(movie_id: @movie.id)[-1]
+    if !@viewing
+      @viewing = current_user.viewings.new
+    end
 
 
     @creator_id = @movie.user_id
-    @viewing = Viewing.new
     @review = Review.new
     # @creator = User.find(@creator_id)
   end
