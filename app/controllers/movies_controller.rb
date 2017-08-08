@@ -25,6 +25,8 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @time = Time.now
+    @viewed = current_user.viewings.where(movie_id: @movie.id)
+    @viewings = current_user.viewings.where(movie_id: @movie.id).count
 
 
     @creator_id = @movie.user_id

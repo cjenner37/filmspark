@@ -1,0 +1,14 @@
+<% if @viewings > 0 %>
+				<h6>You've watched this <%= pluralize(@viewings, 'time') %></h6>
+				<p>Last time you watched this, you 
+					<% if @viewed.last.liked == true %>
+						liked
+					<% else %>
+						didn't like
+					<% end %>
+					it.
+				</p>
+				<h4>Did you rewatch this movie?</h4>
+			<% else %>
+				<h4>Did you watch this movie?</h4>
+			<% end %>

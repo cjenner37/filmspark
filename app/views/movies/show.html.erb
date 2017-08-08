@@ -20,8 +20,9 @@
 <% if user_signed_in? %>
 	<div class="forms-row row">
 		<div class="col s5">
-			<h4>Did you watch this movie?</h4>
-			<%= render 'viewings/form' %>
+			<div class="viewings-form">
+				<%= render 'viewings/form' %>
+			</div>
 		</div>
 		<div class="review-form col s7">
 			<h4>Would you like to leave a review?</h4>
